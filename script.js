@@ -38,6 +38,8 @@ function currentTime() {
         bodySelector.style.backgroundImage = "url('./images/nightsky.jpg')";
         bodySelector.style.color = "white";
     }
+    
+    console.log(currentDate.getTime());
 }
 
 setInterval(currentTime, 1000);
@@ -46,9 +48,15 @@ document.querySelector('.clock-animate').addEventListener('click', function(){
     document.querySelector('.set-alarm').style.display = "flex";  
 });
 
-document.querySelector('#submit').addEventListener('click', function(){
 
-    document.querySelector('.alarm-shown').style.display = "none";
-    document.querySelector('.set-alarm').style.display = "none";
-    document.querySelector('.countdown').style.display = "flex";
-});
+
+// function setAlarm(hour, minute) {
+//     let alarmHour = hour
+//     let alarmMinute = minute
+
+//     const timeMinute = 1000 * 60;
+//     const timeHour = minute * 60;
+//     document.querySelector('.alarm-shown').style.display = "none";
+//     document.querySelector('.set-alarm').style.display = "none";
+//     document.querySelector('.countdown').style.display = "flex";
+// }
