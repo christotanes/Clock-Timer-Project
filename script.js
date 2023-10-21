@@ -33,7 +33,7 @@ function currentTime() {
         bodySelector.style.color = "brown";
     } else if (hour === 15 || hour === 16 || hour === 17 || hour === 18 || hour === 19) {
         bodySelector.style.backgroundImage = "url('./images/sunset.jpg')";
-        bodySelector.style.color = "black";
+        bodySelector.style.color = "#17B5E6";
     } else {
         bodySelector.style.backgroundImage = "url('./images/nightsky.jpg')";
         bodySelector.style.color = "white";
@@ -42,3 +42,13 @@ function currentTime() {
 
 setInterval(currentTime, 1000);
 
+document.querySelector('.clock-animate').addEventListener('click', function(){
+    document.querySelector('.set-alarm').style.display = "flex";  
+});
+
+document.querySelector('#submit').addEventListener('click', function(){
+
+    document.querySelector('.alarm-shown').style.display = "none";
+    document.querySelector('.set-alarm').style.display = "none";
+    document.querySelector('.countdown').style.display = "flex";
+});

@@ -18,9 +18,12 @@ body {
     flex-direction: column;
 }
 
-h1 {
+/* h1 {
     text-align: center;
     margin-top: 10rem;
+} */
+#container-date {
+    margin-top: 8rem;
 }
 
 #container-clock {
@@ -41,11 +44,48 @@ h1 {
 
 .container {
     font-size: 3.5rem;
+    font-weight: bold;
     text-align: center;
 }
 
 .footer { 
     margin-top: auto;
     text-align: center;
+}
 
+.alarm {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-top: 5px;
+    padding: 0;
+}
+
+/* .container-alarm houses .alarm-shown, .set-alarm and .countdown */
+.container-alarm {
+    padding: 1rem 5px;
+    justify-content: center;
+}
+
+/* always shown, once clicked will show .set-alarm */
+.alarm-shown {
+    display: flex;
+}
+
+/* once user submits alarm will display:none then show .countdown */
+.set-alarm {
+    display: none;
+}
+
+/* will show once user sets .set-alarm */
+.countdown {
+    display: none;
+}
+
+.clock-animate {
+    transition: width 1s, height 1s;
+}
+
+.clock-animate:hover {
+    width: 45px;
+    height: 45px;
 }
