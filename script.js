@@ -40,20 +40,20 @@ function currentTime() {
     const correctFullDate = `${namedDay}, ${namedMonth} ${currentDate.getDate()}, ${currentDate.getFullYear()}`
 
     let notMilitaryHour = (Math.round(hour % 12) || 12 );
-    
+
     let ampm = hour >= 12 ? "PM" : "AM";
     
+    // Add zero to single digits
+    function addZero(time) {
+        time = time.toString();
+        return time.length < 2 ? "0" + time : time;        
+    };
+
     date.textContent = correctFullDate; 
     hours.textContent = addZero(notMilitaryHour);
     minutes.textContent = addZero(currentDate.getMinutes());
     seconds.textContent = addZero(currentDate.getSeconds());
     document.querySelector('.ampm').textContent = ampm;
-
-    // Add zero to single digits
-    function addZero(time) {
-        time = time.toString();
-        return time < 2 ? "0" + time : time;        
-    };
 
 // Background will change upon certain times of day.
     if (hour >= 5 && hour <= 9 ) {
@@ -94,6 +94,7 @@ function currentTime() {
         document.querySelector('.cdSeconds').textContent = countdownSeconds;  
     };
 
+    // Checks countdown to play buzzer and display none
     if (countdownTime > 0) {
         alarmCountdown(countdownTime);
     } else if (countdownTime < 0) {
@@ -110,4 +111,9 @@ setInterval(currentTime, 1000);
 
 document.querySelector('.clock-animate').addEventListener('click', function(){
     document.querySelector('.set-alarm').style.display = "flex";  
+});
+
+document.getElementById('clear').addEventListener('click', function(){
+    document.querySelector('.set-alarm').style.display = "none";
+    document.querySelector('.alarm-shown').style.display = "flex";
 });

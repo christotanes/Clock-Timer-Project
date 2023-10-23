@@ -107,9 +107,14 @@ body {
 }
 
 .button {
-    padding: 3px;
+    padding: 5px;
     border-radius: 5px;
     border: 0;
+}
+
+.button-container {
+    text-align: center; 
+    margin-top: 1rem;
 }
 
 .ampm {
