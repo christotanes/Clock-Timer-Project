@@ -43,7 +43,7 @@ body {
 }
 
 .container {
-    font-size: 3.5rem;
+    font-size: 3rem;
     font-weight: bold;
     text-align: center;
 }
@@ -102,4 +102,10 @@ body {
     padding: 3px;
     border-radius: 5px;
     border: 0;
+}
+
+.ampm {
+    font-size: 2rem;
+    font-weight: bold;
+    padding-left: 0.5rem;
 }

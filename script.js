@@ -1,29 +1,43 @@
 console.log("Hello World!");
 
+const monthArray = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const dayArray = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+let date    = document.querySelector('.date');
+let hours   = document.querySelector('.hours');
+let minutes = document.querySelector('.minutes');
+let seconds = document.querySelector('.seconds');
+
+const bodySelector = document.querySelector('body');
+
 function currentTime() {
     const currentDate = new Date();
     // console.log(currentDate.getTime());
     // Make months have names
-    const monthArray = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    const dateArray = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     let namedMonth = monthArray[currentDate.getMonth()];
+    let namedDay = dayArray[currentDate.getDay()];
+    const hour = currentDate.getHours();
 
-    const correctFullDate = `${namedMonth} ${currentDate.getDate()}, ${currentDate.getFullYear()}`
+    const correctFullDate = `${namedDay}, ${namedMonth} ${currentDate.getDate()}, ${currentDate.getFullYear()}`
 
-    let date    = document.querySelector('.date');
-    let hours   = document.querySelector('.hours');
-    let minutes = document.querySelector('.minutes');
-    let seconds = document.querySelector('.seconds');
+    let notMilitaryHour = (Math.round(hour % 12) || 12 );
+    
+    let ampm = hour >= 12 ? "PM" : "AM";
     
     date.textContent = correctFullDate; 
-    hours.textContent = currentDate.getHours();
-    minutes.textContent = currentDate.getMinutes();
-    seconds.textContent = currentDate.getSeconds();
+    hours.textContent = addZero(notMilitaryHour);
+    minutes.textContent = addZero(currentDate.getMinutes());
+    seconds.textContent = addZero(currentDate.getSeconds());
+    document.querySelector('.ampm').textContent = ampm;
+
+    // Add zero to single digits
+    function addZero(time) {
+        time = time.toString();
+        return time < 2 ? "0" + time : time;        
+    };
 
 // Background will change upon certain times of day.
-    const hour = currentDate.getHours();
-    const bodySelector = document.querySelector('body');
-
+    
     if (hour === 5 || hour === 6 || hour === 7 || hour === 8 || hour === 9 ) {
         bodySelector.style.backgroundImage = "url('./images/sunrise.jpg')";
         bodySelector.style.color = "black";
