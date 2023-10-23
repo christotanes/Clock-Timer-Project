@@ -51,6 +51,14 @@ body {
 .footer { 
     margin-top: auto;
     text-align: center;
+    background-color: rgba(75, 75, 75, 0.807);
+    color:antiquewhite;
+    
+}
+
+.footer > a {
+    color: blue;
+    text-decoration: none;
 }
 
 .alarm {
