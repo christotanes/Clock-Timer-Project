@@ -20,7 +20,13 @@ document.getElementById('submit').addEventListener('click', function(e) {
     document.querySelector('.set-alarm').style.display = "none";
     document.querySelector('.countdown').style.display = "flex";
 
-    alarm.push(alarmHour, alarmMinute, alarmSeconds);
+    if (alarmHour === 0) {
+        let nowHour = new Date();
+        alarmHour = Number(nowHour.getHours());
+        alarm.push(alarmHour, alarmMinute, alarmSeconds)
+    } else {
+        alarm.push(alarmHour, alarmMinute, alarmSeconds);
+    }
 });
 
 function currentTime() {
@@ -69,11 +75,6 @@ function currentTime() {
 
     // sets today's date.. later to be modifiable
     let nowDate = currentDate.toDateString();
-
-    if (alarm[0] === 0){
-        alarm.shift();
-        alarm.unshift(Number(hour));
-    };
 
     //concatenates the date + hour alarm
     const alarmDate = `${nowDate} ${alarm[0]}:${alarm[1]}:${alarm[2]}`
