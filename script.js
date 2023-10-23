@@ -29,7 +29,7 @@ function currentTime() {
     // Make months have names
     let namedMonth = monthArray[currentDate.getMonth()];
     let namedDay = dayArray[currentDate.getDay()];
-    const hour = currentDate.getHours();
+    let hour = currentDate.getHours();
 
     const correctFullDate = `${namedDay}, ${namedMonth} ${currentDate.getDate()}, ${currentDate.getFullYear()}`
 
