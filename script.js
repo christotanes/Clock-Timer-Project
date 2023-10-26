@@ -7,6 +7,10 @@ const minutes = document.querySelector('.minutes');
 const seconds = document.querySelector('.seconds');
 const bodySelector = document.querySelector('body');
 
+const soundEffect = new Audio();
+soundEffect.autoplay = true;
+soundEffect.src = "data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAEA";
+
 // User sets alarm
 document.getElementById('submit').addEventListener('click', function(e) {
     e.preventDefault();
@@ -99,8 +103,9 @@ function currentTime() {
         alarmCountdown(countdownTime);
     } else if (countdownTime < 0) {
         // clearInterval(myInterval);
-        audio = new Audio("./sounds/alarmbuzzer.wav");
-        audio.play();
+        // audio = new Audio("./sounds/alarmbuzzer.wav");
+        // audio.play();
+        soundEffect.src = "./sounds/alarmbuzzer.wav";
         document.querySelector('.alarm-shown').style.display = "flex";
         document.querySelector('.countdown').style.display = "none";
         alarm = [];
