@@ -102,7 +102,7 @@ function currentTime() {
     if (countdownTime > 0) {
         alarmCountdown(countdownTime);
     } else if (countdownTime < 0) {
-        // clearInterval(myInterval);
+        clearInterval(myInterval);
         // audio = new Audio("./sounds/alarmbuzzer.wav");
         // audio.play();
         soundEffect.src = "./sounds/alarmbuzzer.wav";
