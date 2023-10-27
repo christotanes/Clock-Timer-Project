@@ -7,23 +7,8 @@ const minutes = document.querySelector('.minutes');
 const seconds = document.querySelector('.seconds');
 const bodySelector = document.querySelector('body');
 
-const currentDate = new Date();
-let nowDate = currentDate.toDateString();
-
-//concatenates the date + hour alarm
-const alarmDate = `${nowDate} ${alarm[0]}:${alarm[1]}:${alarm[2]}`
-const alarmTime = new Date(alarmDate).getTime(); // alarm now in computer terms
-const nowTime = currentDate.getTime(); // computer terms
-// alarmTime > nowTime or NOW so subtract
-const countdownTime = (alarmTime - nowTime);
-
-let buzzerAudio = setTimeout(function playAudio() {
-    const audio = document.getElementById("gameAudio");
-    audio.play();
-}, countdownTime);
-
 // User sets alarm
-document.getElementById('submit').addEventListener('click', function(e) {
+document.getElementById('submit').addEventListener('click', (e) => {
     e.preventDefault();
     
     // user sets hour and minutes
@@ -42,9 +27,28 @@ document.getElementById('submit').addEventListener('click', function(e) {
     } else {
         alarm.push(alarmHour, alarmMinute, alarmSeconds);
     }
+    const currentDate = new Date();
+    let nowDate = currentDate.toDateString();
 
-    buzzerAudio();
+    //concatenates the date + hour alarm
+    const alarmDate = `${nowDate} ${alarm[0]}:${alarm[1]}:${alarm[2]}`
+    const alarmTime = new Date(alarmDate).getTime(); // alarm now in computer terms
+    const nowTime = currentDate.getTime(); // computer terms
+    // alarmTime > nowTime or NOW so subtract
+    const countdownTime = (alarmTime - nowTime);
+
+    function alarmCountdown(countdownTime) {
+        let countdownSeconds = Math.floor((countdownTime % (1000*60)) / 1000) + 1;
+        return countdownSeconds * 1000;
+    };
+
+    let buzzerAudio = setTimeout(function playAudio() {
+        const audio = document.getElementById("gameAudio");
+        audio.play();
+    }, (alarmCountdown(countdownTime)));
+    buzzerAudio;
 });
+
 
 function currentTime() {
     const currentDate = new Date();
@@ -115,12 +119,12 @@ function currentTime() {
     if (countdownTime > 0) {
         alarmCountdown(countdownTime);
     } else if (countdownTime < 0) {
-        clearInterval(myInterval);
-        audio = new Audio("./sounds/alarmbuzzer.wav");
-        audio.play();
+        // clearInterval(myInterval);
+        // audio = new Audio("./sounds/alarmbuzzer.wav");
+        // audio.play();
         document.querySelector('.alarm-shown').style.display = "flex";
         document.querySelector('.countdown').style.display = "none";
-        alarm = [];
+        alarm.length = 0;
     };
 };
 
