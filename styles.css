@@ -53,7 +53,12 @@ body {
     text-align: center;
     background-color: rgba(75, 75, 75, 0.807);
     color:#FEF2BF;
-    padding-bottom: 2rem;
+}
+
+@media all and (max-width: 768px) {
+    .footer {
+        transform: translateY(-100%);
+    }
 }
 
 a {

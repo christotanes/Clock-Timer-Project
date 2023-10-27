@@ -8,14 +8,18 @@ const seconds = document.querySelector('.seconds');
 const bodySelector = document.querySelector('body');
 
 // User sets alarm
-document.getElementById('submit').addEventListener('click', function getTimer(e) {
+document.getElementById('submit').addEventListener('click', (e) => {
 // function timer(e) {
     e.preventDefault();
-    
+
+    document.querySelector('.alarm-shown').style.display = "none";
+    document.querySelector('.set-alarm').style.display = "none";
+    document.querySelector('.countdown').style.display = "flex";
+
     // user sets hour and minutes
     let alarmHour = Number(document.getElementById('alarm-hours').value);
     let alarmMinute = Number(document.getElementById('alarm-minutes').value);
-    let alarmSeconds= 0;
+    let alarmSeconds = 0;
 
     if (alarmHour === 0) {
         let nowHour = new Date();
@@ -24,36 +28,31 @@ document.getElementById('submit').addEventListener('click', function getTimer(e)
     } else {
         alarm.push(alarmHour, alarmMinute, alarmSeconds);
     }
-
-    const currentDate = new Date();
-    let nowDate = currentDate.toDateString();
-
-    //concatenates the date + hour alarm
-    const alarmDate = `${nowDate} ${alarm[0]}:${alarm[1]}:${alarm[2]}`
-    const alarmTime = new Date(alarmDate).getTime(); // alarm now in computer terms
-    const nowTime = currentDate.getTime(); // computer terms
-    // alarmTime > nowTime or NOW so subtract
-    const countdownTime = (alarmTime - nowTime);
-
-    function alarmCountdown(countdownTime) {
-        let countdownSeconds = Math.floor((countdownTime % (1000*60)) / 1000) + 1;
-        return countdownSeconds * 1000;
-    };
-    document.getElementById('playAudio').onclick = (e) => {
-        e.preventDefault();
-        document.querySelector('.alarm-shown').style.display = "none";
-        document.querySelector('.set-alarm').style.display = "none";
-        document.querySelector('.countdown').style.display = "flex";
-        let buzzerAudio = setTimeout(function playAudio() {
-            const audio = document.getElementById("buzzAudio");
-            audio.play();
-            }, (alarmCountdown(countdownTime)));
-        buzzerAudio;
-    };
 });
 
-// sets a Timer for audio on the HTML to be played, iOS generally accepts HTML audio that's why the src is at the html
+    // const currentDate = new Date();
+    // let nowDate = currentDate.toDateString();
 
+    // //concatenates the date + hour alarm
+    // const alarmDate = `${nowDate} ${alarm[0]}:${alarm[1]}:${alarm[2]}`
+    // const alarmTime = new Date(alarmDate).getTime(); // alarm now in computer terms
+    // const nowTime = currentDate.getTime(); // computer terms
+    // // alarmTime > nowTime or NOW so subtract
+    // const countdownTime = (alarmTime - nowTime);
+
+    // function alarmCountdown(countdownTime) {
+    //     let countdownSeconds = Math.floor((countdownTime % (1000*60)) / 1000) + 1;
+    //     return countdownSeconds * 1000;
+    // };
+    // document.getElementById('playAudio').onclick = (e) => {
+    //     e.preventDefault();
+
+    //     let buzzerAudio = setTimeout(function playAudio() {
+    //         const audio = document.getElementById("buzzAudio");
+    //         audio.play();
+    //         }, (alarmCountdown(countdownTime)));
+    //     buzzerAudio;
+    // };
 
 function currentTime() {
     const currentDate = new Date();
@@ -125,8 +124,8 @@ function currentTime() {
         alarmCountdown(countdownTime);
     } else if (countdownTime < 0) {
         // clearInterval(myInterval);
-        // audio = new Audio("./sounds/alarmbuzzer.wav");
-        // audio.play();
+        audio = new Audio("./sounds/alarmbuzzer.wav");
+        audio.play();
         document.querySelector('.alarm-shown').style.display = "flex";
         document.querySelector('.countdown').style.display = "none";
         alarm.length = 0;
