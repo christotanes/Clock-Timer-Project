@@ -9,16 +9,13 @@ const bodySelector = document.querySelector('body');
 
 // User sets alarm
 document.getElementById('submit').addEventListener('click', (e) => {
+// function timer(e) {
     e.preventDefault();
     
     // user sets hour and minutes
     let alarmHour = Number(document.getElementById('alarm-hours').value);
     let alarmMinute = Number(document.getElementById('alarm-minutes').value);
     let alarmSeconds= 0;
-
-    document.querySelector('.alarm-shown').style.display = "none";
-    document.querySelector('.set-alarm').style.display = "none";
-    document.querySelector('.countdown').style.display = "flex";
 
     if (alarmHour === 0) {
         let nowHour = new Date();
@@ -27,6 +24,7 @@ document.getElementById('submit').addEventListener('click', (e) => {
     } else {
         alarm.push(alarmHour, alarmMinute, alarmSeconds);
     }
+
     const currentDate = new Date();
     let nowDate = currentDate.toDateString();
 
@@ -41,13 +39,21 @@ document.getElementById('submit').addEventListener('click', (e) => {
         let countdownSeconds = Math.floor((countdownTime % (1000*60)) / 1000) + 1;
         return countdownSeconds * 1000;
     };
-
-    let buzzerAudio = setTimeout(function playAudio() {
-        const audio = document.getElementById("gameAudio");
-        audio.play();
-    }, (alarmCountdown(countdownTime)));
-    buzzerAudio;
+    document.getElementById('playAudio').addEventListener('click', (e) => {
+        e.preventDefault();
+        document.querySelector('.alarm-shown').style.display = "none";
+        document.querySelector('.set-alarm').style.display = "none";
+        document.querySelector('.countdown').style.display = "flex";
+    
+        // sets a Timer for audio on the HTML to be played, iOS generally accepts HTML audio that's why the src is at the html
+        let buzzerAudio = setTimeout(function playAudio() {
+            const audio = document.getElementById("buzzAudio");
+            audio.play();
+        }, (alarmCountdown(countdownTime)));
+        buzzerAudio;
+    });
 });
+
 
 
 function currentTime() {
