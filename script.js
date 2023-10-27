@@ -7,9 +7,9 @@ const minutes = document.querySelector('.minutes');
 const seconds = document.querySelector('.seconds');
 const bodySelector = document.querySelector('body');
 
-const soundEffect = new Audio();
-soundEffect.autoplay = true;
-soundEffect.src = "data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAEA";
+// const soundEffect = new Audio();
+// soundEffect.autoplay = true;
+// soundEffect.src = "data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAEA";
 
 // User sets alarm
 document.getElementById('submit').addEventListener('click', function(e) {
@@ -32,6 +32,26 @@ document.getElementById('submit').addEventListener('click', function(e) {
         alarm.push(alarmHour, alarmMinute, alarmSeconds);
     }
 });
+const currentDate = new Date();
+let nowDate = currentDate.toDateString();
+
+    //concatenates the date + hour alarm
+    const alarmDate = `${nowDate} ${alarm[0]}:${alarm[1]}:${alarm[2]}`
+    const alarmTime = new Date(alarmDate).getTime(); // alarm now in computer terms
+    const nowTime = currentDate.getTime(); // computer terms
+    // alarmTime > nowTime or NOW so subtract
+    const countdownTime = (alarmTime - nowTime);
+
+    function alarmCountdown(countdownTime) {
+        let countdownHours = Math.floor((countdownTime % (1000*60*60*24)) / (1000*60*60));
+        let countdownMinutes = Math.floor((countdownTime % (1000*60*60)) / (1000*60));
+        let countdownSeconds = Math.floor((countdownTime % (1000*60)) / 1000) + 1;
+
+        // Set values to html
+        document.querySelector('.cdHours').textContent = countdownHours;
+        document.querySelector('.cdMinutes').textContent = countdownMinutes;
+        document.querySelector('.cdSeconds').textContent = countdownSeconds;  
+    };
 
 function currentTime() {
     const currentDate = new Date();
@@ -103,9 +123,8 @@ function currentTime() {
         alarmCountdown(countdownTime);
     } else if (countdownTime < 0) {
         clearInterval(myInterval);
-        // audio = new Audio("./sounds/alarmbuzzer.wav");
-        // audio.play();
-        soundEffect.src = "./sounds/alarmbuzzer.wav";
+        audio = new Audio("./sounds/alarmbuzzer.wav");
+        audio.play();
         document.querySelector('.alarm-shown').style.display = "flex";
         document.querySelector('.countdown').style.display = "none";
         alarm = [];
@@ -122,3 +141,8 @@ document.getElementById('clear').addEventListener('click', function(){
     document.querySelector('.set-alarm').style.display = "none";
     document.querySelector('.alarm-shown').style.display = "flex";
 });
+
+function playAudio() {
+    const audio = document.getElementById("gameAudio");
+    audio.play();
+}
