@@ -53,11 +53,11 @@ body {
     text-align: center;
     background-color: rgba(75, 75, 75, 0.807);
     color:#FEF2BF;
-    padding-bottom: 1rem;
+    padding-bottom: 2rem;
 }
 
 a {
-margin: 5px;
+/* margin: 5px; */
 padding: 0 5px;
 }
 

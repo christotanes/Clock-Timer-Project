@@ -8,7 +8,7 @@ const seconds = document.querySelector('.seconds');
 const bodySelector = document.querySelector('body');
 
 // User sets alarm
-document.getElementById('submit').addEventListener('click', (e) => {
+document.getElementById('submit').addEventListener('click', function getTimer(e) {
 // function timer(e) {
     e.preventDefault();
     
@@ -39,21 +39,20 @@ document.getElementById('submit').addEventListener('click', (e) => {
         let countdownSeconds = Math.floor((countdownTime % (1000*60)) / 1000) + 1;
         return countdownSeconds * 1000;
     };
-    document.getElementById('playAudio').addEventListener('click', (e) => {
+    document.getElementById('playAudio').onclick = (e) => {
         e.preventDefault();
         document.querySelector('.alarm-shown').style.display = "none";
         document.querySelector('.set-alarm').style.display = "none";
         document.querySelector('.countdown').style.display = "flex";
-    
-        // sets a Timer for audio on the HTML to be played, iOS generally accepts HTML audio that's why the src is at the html
         let buzzerAudio = setTimeout(function playAudio() {
             const audio = document.getElementById("buzzAudio");
             audio.play();
-        }, (alarmCountdown(countdownTime)));
+            }, (alarmCountdown(countdownTime)));
         buzzerAudio;
-    });
+    };
 });
 
+// sets a Timer for audio on the HTML to be played, iOS generally accepts HTML audio that's why the src is at the html
 
 
 function currentTime() {
